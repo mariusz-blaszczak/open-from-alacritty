@@ -1,0 +1,2 @@
+echo "start" >> logfile.log
+ruby /Users/mariusz/Projects/Ruby/open-from-alacritty/main.rb
