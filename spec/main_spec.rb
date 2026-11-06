@@ -2,7 +2,7 @@ require "spec_helper"
 require_relative "../lib/command_builder"
 
 RSpec.describe CommandBuilder do
-  let(:rubymine_path) { "'/Users/mblaszczak/Library/Application Support/JetBrains/Toolbox/scripts/rubymine'" }
+  let(:rubymine_path) { "'#{Dir.home}/Library/Application Support/JetBrains/Toolbox/scripts/rubymine'" }
 
   describe ".build" do
     context "when argument contains both file path and line number" do
@@ -58,6 +58,14 @@ RSpec.describe CommandBuilder do
       file_path, line_number = CommandBuilder.parse_argument("/foo/bar.rb")
       expect(file_path).to eq("/foo/bar.rb")
       expect(line_number).to be_nil
+    end
+
+    context "when path starts with a tilde" do
+      it "expands it to the home directory" do
+        file_path, line_number = CommandBuilder.parse_argument("~/.claude/plans/plan.md")
+        expect(file_path).to eq("#{Dir.home}/.claude/plans/plan.md")
+        expect(line_number).to be_nil
+      end
     end
 
     context 'when path includes docker path' do

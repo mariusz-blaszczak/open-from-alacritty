@@ -1,9 +1,10 @@
 module CommandBuilder
-  RUBYMINE_PATH = "'/Users/mblaszczak/Library/Application Support/JetBrains/Toolbox/scripts/rubymine'"
+  RUBYMINE_PATH = "'#{Dir.home}/Library/Application Support/JetBrains/Toolbox/scripts/rubymine'"
 
   def self.parse_argument(argument)
     file_path, line_number = argument.split(":", 2)
     file_path = file_path.delete_prefix("/usr/src/app/")
+    file_path = File.expand_path(file_path) if file_path.start_with?("~")
 
     [file_path, line_number]
   end
