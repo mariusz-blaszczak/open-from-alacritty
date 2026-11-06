@@ -4,7 +4,7 @@ require "logger"
 require_relative "lib/command_builder"
 
 # Initialize the logger
-log_file_path = '/Users/mblaszczak/Projects/Ruby/open-from-alacritty/logfile.log'
+log_file_path = File.join(__dir__, 'logfile.log')
 logger = Logger.new(log_file_path)
 logger.info('Script started.')
 
