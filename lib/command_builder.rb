@@ -4,6 +4,7 @@ module CommandBuilder
   def self.parse_argument(argument)
     file_path, line_number = argument.split(":", 2)
     file_path = file_path.delete_prefix("/usr/src/app/")
+    file_path = file_path.delete_prefix("/usr/src/hr-hub/")
     file_path = File.expand_path(file_path) if file_path.start_with?("~")
 
     [file_path, line_number]

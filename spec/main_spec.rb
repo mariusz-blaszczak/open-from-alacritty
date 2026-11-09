@@ -75,6 +75,14 @@ RSpec.describe CommandBuilder do
         expect(line_number).to eq('57')
       end
     end
+
+    context 'when hr-hub docker path' do
+      it 'cuts docker path from command line' do
+        file_path, line_number = CommandBuilder.parse_argument("/usr/src/hr-hub/app/models/job.rb:27")
+        expect(file_path).to eq("app/models/job.rb")
+        expect(line_number).to eq('27')
+      end
+    end
   end
 end
 
